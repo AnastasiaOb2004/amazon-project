@@ -1,8 +1,12 @@
-import {addToCart } from '../data/cart.js';
+import {addToCart, cart, displayQuantity } from '../data/cart.js';
 import { products } from '../data/products.js';
 import { formatCurrency } from "./utils/money.js";
 
 let productsHTML = '';
+
+const productNumber = document.querySelector('.js-cart-quantity');
+let cartQuantity = displayQuantity();
+productNumber.innerText = cartQuantity;
 
 products.forEach((product) => {
     productsHTML += `  
