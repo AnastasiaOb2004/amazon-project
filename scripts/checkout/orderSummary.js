@@ -1,8 +1,9 @@
 import { cart, removeFromCart, updateQuantityForCheckout, updateQuantity, updateDeliveryOption } from "../../data/cart.js";
-import { products, getProduct } from "../../data/products.js";
+import {getProduct } from "../../data/products.js";
 import { formatCurrency } from "../utils/money.js";
 import dayjs from 'https://unpkg.com/dayjs@1.11.10/esm/index.js';
 import { deliveryOptions, getDeliveryOption } from "../../data/deliveryOptions.js";
+import { renderPaymentSummary } from "./paymentSummary.js";
 
 
 export function renderOrderSummary() {
@@ -17,7 +18,6 @@ export function renderOrderSummary() {
 
     const deliveryOption = getDeliveryOption(deliveryOptionId);
 
-    // Check if deliveryOption exists before trying to access its properties
     if (deliveryOption) {
       const today = dayjs();
       const deliveryDate = today.add(deliveryOption.deliveryDays, 'days');
@@ -66,9 +66,7 @@ export function renderOrderSummary() {
         </div>
         </div>
       `;
-    } else {
-      console.error('Delivery option not found for item', cartItem);
-    }
+    } 
   });
 
 
@@ -111,6 +109,7 @@ export function renderOrderSummary() {
       removeFromCart(productId);
       const container = document.querySelector(`.js-cart-item-container-${productId}`);
       container.remove();
+      renderPaymentSummary();
     })
   })
 
@@ -119,7 +118,7 @@ export function renderOrderSummary() {
       const { productId, deliveryOptionId } = element.dataset;
       updateDeliveryOption(productId, deliveryOptionId);
       renderOrderSummary();
-
+      renderPaymentSummary();
     })
   })
 
