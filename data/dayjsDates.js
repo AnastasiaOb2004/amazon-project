@@ -4,4 +4,3 @@ function isWeekend(day) {
     }
 }
 
-

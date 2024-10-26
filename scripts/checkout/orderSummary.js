@@ -4,7 +4,6 @@ import { formatCurrency } from "../utils/money.js";
 import { deliveryOptions, getDeliveryOption, calculateDeliveryDate } from "../../data/deliveryOptions.js";
 import { renderPaymentSummary } from "./paymentSummary.js";
 
-
 export function renderOrderSummary() {
   let cartSummaryHTML = '';
 
