@@ -9,7 +9,15 @@ describe('Test suite: formatCurrency', ()=> {
     expect(formatCurrency(0)).toEqual('0.00');
     })
 
-    it('rounds up to the earest cent', () => {
+    it('rounds up to the nearest cent (to bigger)', () => {
         expect(formatCurrency(2000.5)).toEqual('20.01');
+    })
+
+    it('rounds up to the earest cent (to smaller)', () => {
+        expect(formatCurrency(2000.4)).toEqual('20.00');
+    })
+
+    it('modify negative values', () => {
+        expect(formatCurrency(-50)).toEqual('0.50');
     })
 });
